@@ -6,27 +6,26 @@ csvpath = os.path.join('budget_data.csv')
 
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    print(csvreader)
+    #print(csvreader)
     csv_header = next(csvreader)
-    print(f"CSV Header: {csv_header}")
+    #print(f"CSV Header: {csv_header}")
     
-    
-#get row count in order to get total # of months
+#initialize tracker variables
     net_profit = 0
-    row_count = 0
-    prev = 0 
-    prof_change = 0
-    total_change = 0
-    max_increase = 0
-    max_decrease = 0
+    row_count = 0 #to count the # of months
+    prev = 0 #to store the previous profit, in order to calculate change from the currnet
+    prof_change = 0 #profit change (current profit - prev)
+    total_change = 0 #sum of profit change
+    max_increase = 0 #max profit change
+    max_decrease = 0 #max negative profit change
     
 
 
     for row in csvreader:
-        row_count += 1
-        net_profit += int(row[1])
-        if row_count != 1:
-            prof_change = (int(row[1]) - int(prev))
+        row_count += 1 #to count all the months
+        net_profit += int(row[1]) #to calc the net profit change across all months
+        if row_count != 1:  #to skip the first row, since we're lookign at change in profit
+            prof_change = (int(row[1]) - int(prev)) #
             total_change += prof_change
             if prof_change > max_increase:
                 max_increase = prof_change
@@ -38,13 +37,6 @@ with open(csvpath, newline='') as csvfile:
 
  
 
-    
-    
-
-
-#get total net profit by looping through each row and adding to a total net_profit tracker
-    
-    
     
 
 
